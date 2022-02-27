@@ -45,6 +45,15 @@ ENV IN_DOCKER=true
 ENV DJANGO_CONFIGURATION=Prod
 ENV IT_FS_URL=/app/data
 ENV IT_STATIC_ROOT=/var/www/imagetagger
+ENV IT_FS_URL=/app/data
+ENV IT_STATIC_ROOT=/var/www/imagetagger
+ENV IT_SECRET_KEY='DEV-KEY ONLY! DONT USE IN PRODUCTION!'
+ENV IT_DOWNLOAD_BASE_URL='localhost'
+ENV IT_DB_PASSWORD='imagetagger'
+ENV IT_DB_HOST='localhost'
+ENV IT_ALLOWED_HOSTS=['localhost','127.0.0.1','glacial-earth-64913.herokuapp.com']
+ENV IT_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+ENV IT_EMAIL_HOST=True
 
 # add image metadata
 EXPOSE 3008

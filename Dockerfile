@@ -55,6 +55,16 @@ ENV IT_ALLOWED_HOSTS=['localhost','127.0.0.1','glacial-earth-64913.herokuapp.com
 ENV IT_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ENV IT_EMAIL_HOST=True
 
+COPY --from=build-python /opt/venv /opt/venv
+RUN apk update && apk add --virtual build-deps gcc python3-dev musl-dev postgresql-dev
+RUN pip install psycopg2-binary
+WORKDIR /app
+COPY . .
+RUN python manage.py collectstatic --noinput
+RUN adduser -D myuser
+USER myuser
+CMD gunicorn hello_django.wsgi:application --bind 0.0.0.0:$PORT
+
 # add image metadata
 EXPOSE 3008
 EXPOSE 80
